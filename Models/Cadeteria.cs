@@ -65,18 +65,17 @@ namespace EspacioCadeteria
 
         }
 
-        public List<Cadete> MostrarListaDeCadetes()
+        public List<Cadete> traerListaCadetes()
         {
-            // Console.WriteLine("Mostrando listado de cadetes");
-            // foreach (var cadete in listadoCadetes)
-            // {
-            //     Console.WriteLine($"ID: {cadete.Id}");
-            //     Console.WriteLine($"Nombre: {cadete.Nombre} {cadete.Apellido}");
-            //     Console.WriteLine($"Teléfono: {cadete.Telefono}");
-            //     Console.WriteLine($"Dirección: {cadete.Direccion}");
-            // }
             return listadoCadetes;
         }
+
+        public List<Pedido> traerListaPedidos()
+        {
+            return listadoPedidos;
+        }
+
+
 
         public bool ExistePedido(int idPedido)
         {
@@ -135,7 +134,7 @@ namespace EspacioCadeteria
 
         public bool ReasignarCadeteAPedido(int idPedido, int idCadete)
         {
-             if (ExistePedido(idPedido) && ExisteCadete(idCadete))
+            if (ExistePedido(idPedido) && ExisteCadete(idCadete))
             {
                 Pedido pedido = listadoPedidos.First(p => p.Nro == idPedido);
                 Cadete cadete = listadoCadetes.First(c => c.Id == idCadete);
@@ -158,6 +157,12 @@ namespace EspacioCadeteria
             {
                 return 0;
             }
+        }
+
+        public string GenerarInforme()
+        {
+            string texto = $" --- INFORME DE LA CADETERÍA --- \n  Cantidad de pedidos: {listadoPedidos.Count} \n Cantidad de Cadetes: {listadoCadetes.Count}";
+            return (texto);
         }
 
     }
