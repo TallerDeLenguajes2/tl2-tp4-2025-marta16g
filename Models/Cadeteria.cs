@@ -57,7 +57,7 @@ namespace EspacioCadeteria
 
         public List<Cadete> DarDeBajaCadete(int id)
         {
-            if (listadoCadetes.Any())
+            if (listadoCadetes.Any() && listadoCadetes.Exists(c => c.Id == id))
             {
                 listadoCadetes.Remove(listadoCadetes.Find(c => c.Id == id));
             }
