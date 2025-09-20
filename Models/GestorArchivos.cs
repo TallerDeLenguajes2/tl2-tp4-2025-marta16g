@@ -9,7 +9,7 @@ namespace EspacioGestorArchivos
 {
     public class GestorArchivos
     {
-        Cadeteria traerCadeteriaCSV(string archivo = "")
+        public Cadeteria TraerCadeteriaCSV(string archivo = "")
         {
             Cadeteria cadeteria = new("Pepe's Cadetería", "Avenida Belgrano 3425", 4391541, "Alfredo Navarro");
             if (archivo.Length > 0)
@@ -28,6 +28,26 @@ namespace EspacioGestorArchivos
                 }
             }
             return cadeteria;
+        }
+
+        public List<Cadete> TraerCadetesCSV(string archivo, Cadeteria cadeteria)
+        {
+            List<Cadete> cadetes = new();
+
+            var lineas = File.ReadAllLines(archivo);
+            foreach (var linea in lineas)
+            {
+                var partes = linea.Split(",");
+                bool parseId = int.TryParse(partes[0], out int id);
+                bool parseTelefono = ulong.TryParse(partes[4], out ulong telefono);
+                if (partes.Length == 5 && parseId && cadetes.Exists(c => c.Id == id) && parseTelefono)
+                {
+                    Cadete cadete = new(id, partes[1], partes[2], partes[3], telefono);
+                    cadetes.Add(cadete);
+                }
+            }
+
+            return cadetes;
         }
     }
 }
