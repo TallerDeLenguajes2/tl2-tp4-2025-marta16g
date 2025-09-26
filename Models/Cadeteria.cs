@@ -13,8 +13,8 @@ namespace EspacioCadeteria
         private string direccion;
         private ulong telefono;
         private string titular;
-        private readonly List<Cadete> listadoCadetes;
-        private readonly List<Pedido> listadoPedidos;
+        private List<Cadete> listadoCadetes;
+        private List<Pedido> listadoPedidos;
 
 
         public string Nombre { get => nombre; set => nombre = value; }
@@ -35,22 +35,22 @@ namespace EspacioCadeteria
             listadoPedidos = new List<Pedido>();
         }
 
-        public static Cadeteria CargarCadeteriaCSV(string archivo)
-        {
-            var linea = File.ReadAllLines(archivo).First();
-            var datos = linea.Split(",");
-            Cadeteria cadeteriaCSV = new Cadeteria(datos[0], datos[1], ulong.Parse(datos[2]), datos[3]);
-            return cadeteriaCSV;
-        }
+        // public static Cadeteria CargarCadeteriaCSV(string archivo)
+        // {
+        //     var linea = File.ReadAllLines(archivo).First();
+        //     var datos = linea.Split(",");
+        //     Cadeteria cadeteriaCSV = new Cadeteria(datos[0], datos[1], ulong.Parse(datos[2]), datos[3]);
+        //     return cadeteriaCSV;
+        // }
 
-        public void CargarCadetesCSV(string archivo)
-        {
-            foreach (var linea in File.ReadAllLines(archivo))
-            {
-                var datos = linea.Split(",");
-                DarDeAltaCadete(int.Parse(datos[0]), datos[1], datos[2], datos[3], ulong.Parse(datos[4]));
-            }
-        }
+        // public void CargarCadetesCSV(string archivo)
+        // {
+        //     foreach (var linea in File.ReadAllLines(archivo))
+        //     {
+        //         var datos = linea.Split(",");
+        //         DarDeAltaCadete(int.Parse(datos[0]), datos[1], datos[2], datos[3], ulong.Parse(datos[4]));
+        //     }
+        // }
         public void DarDeAltaCadete(int id, string nombre, string apellido, string direccion, ulong telefono)
         {
             Cadete nuevoCadete = new Cadete(id, nombre, apellido, direccion, telefono);
@@ -78,6 +78,15 @@ namespace EspacioCadeteria
             return listadoPedidos;
         }
 
+        public void AgregarListaCadetes(List<Cadete> cadetes)
+        {
+            listadoCadetes = cadetes;
+        }
+
+        public void AgregarListaPedidos(List<Pedido> pedidos)
+        {
+            listadoPedidos = pedidos;
+        }
 
 
         public bool ExistePedido(int idPedido)
