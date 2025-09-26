@@ -13,14 +13,17 @@ namespace EspacioCadeteria
         private string direccion;
         private ulong telefono;
         private string titular;
-        private List<Cadete> listadoCadetes;
-        private List<Pedido> listadoPedidos;
+        private readonly List<Cadete> listadoCadetes;
+        private readonly List<Pedido> listadoPedidos;
 
 
         public string Nombre { get => nombre; set => nombre = value; }
         public string Direccion { get => direccion; set => direccion = value; }
         public ulong Telefono { get => telefono; set => telefono = value; }
         public string Titular { get => titular; set => titular = value; }
+
+
+        public Cadeteria(){ }
 
         public Cadeteria(string nombre, string direccion, ulong telefono, string titular)
         {
@@ -65,12 +68,12 @@ namespace EspacioCadeteria
 
         }
 
-        public List<Cadete> traerListaCadetes()
+        public List<Cadete> TraerListaCadetes()
         {
             return listadoCadetes;
         }
 
-        public List<Pedido> traerListaPedidos()
+        public List<Pedido> TraerListaPedidos()
         {
             return listadoPedidos;
         }
@@ -139,6 +142,22 @@ namespace EspacioCadeteria
                 Pedido pedido = listadoPedidos.First(p => p.Nro == idPedido);
                 Cadete cadete = listadoCadetes.First(c => c.Id == idCadete);
                 pedido.Cadete = cadete;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool CambiarEstadoPedido(int idPedido, int estado)
+        {
+            if (listadoPedidos.Exists(p => p.Nro == idPedido) && Enum.IsDefined(typeof(EnumEstado), estado))
+            {
+                Pedido pedido = new();
+                pedido = listadoPedidos.Find(p => p.Nro == idPedido);
+                pedido.Estado = (EnumEstado)estado;
+
                 return true;
             }
             else
