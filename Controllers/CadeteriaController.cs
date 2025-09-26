@@ -56,6 +56,8 @@ namespace EspacioCadeteriaController
         public IActionResult AgregarPedido([FromBody] Pedido pedido)
         {
             miCadeteria.DarDeAltaPedido(pedido);
+            //Agregado del guardar en json
+            ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
 
             return Created($"api/cadeteria/AgregarPedido/{pedido.Nro}", pedido);
         }
@@ -64,6 +66,9 @@ namespace EspacioCadeteriaController
         public IActionResult AsignarPedido(int idPedido, int idCadete)
         {
             miCadeteria.AsignarCadeteAPedido(idPedido, idCadete);
+            //Agregado del guardar en json
+            ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
+
             return Ok($"Cadete {idCadete} asignado al pedido {idPedido} ");
         }
 
@@ -72,6 +77,8 @@ namespace EspacioCadeteriaController
         {
 
             miCadeteria.CambiarEstadoPedido(idPedido, nuevoEstado);
+            //Agregado del guardar en json
+            ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
 
             return Ok($"El pedido {idPedido} pasó a estado {(EnumEstado)nuevoEstado}");
 
@@ -81,6 +88,8 @@ namespace EspacioCadeteriaController
         public IActionResult CambiarCadetePedido(int idPedido, int idNuevoCadete)
         {
             miCadeteria.ReasignarCadeteAPedido(idPedido, idNuevoCadete);
+            //Agregado del guardar en json
+            ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
             return Ok($"Pedido Número {idPedido} reasignado a cadete {idNuevoCadete}");
         }
     }
