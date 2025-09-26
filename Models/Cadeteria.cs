@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.IO.Pipes;
+using System.Text.Json.Serialization;
 using EspacioCadete;
 using EspacioPedido;
 
@@ -16,10 +17,13 @@ namespace EspacioCadeteria
         private List<Cadete> listadoCadetes;
         private List<Pedido> listadoPedidos;
 
-
+        [JsonPropertyName("Nombre")]
         public string Nombre { get => nombre; set => nombre = value; }
+        [JsonPropertyName("Direccion")]
         public string Direccion { get => direccion; set => direccion = value; }
+        [JsonPropertyName("Telefono")]
         public ulong Telefono { get => telefono; set => telefono = value; }
+        [JsonPropertyName("Titular")]
         public string Titular { get => titular; set => titular = value; }
 
 
