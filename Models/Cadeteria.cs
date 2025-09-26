@@ -150,19 +150,13 @@ namespace EspacioCadeteria
             }
         }
 
-        public bool CambiarEstadoPedido(int idPedido, int estado)
+        public void CambiarEstadoPedido(int idPedido, int estado)
         {
             if (listadoPedidos.Exists(p => p.Nro == idPedido) && Enum.IsDefined(typeof(EnumEstado), estado))
             {
                 Pedido pedido = new();
                 pedido = listadoPedidos.Find(p => p.Nro == idPedido);
                 pedido.Estado = (EnumEstado)estado;
-
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 
