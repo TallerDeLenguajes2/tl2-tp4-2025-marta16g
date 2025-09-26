@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 using EspacioCadete;
 using EspacioCliente;
 
@@ -18,22 +19,24 @@ namespace EspacioPedido
         private string obs;
         private Cliente cliente;
         private EnumEstado estado;
-        private Cadete cadete;
+        private Cadete? cadete;
 
 
         public int Nro { get => nro; set => nro = value; }
         public string Obs { get => obs; set => obs = value; }
         public Cliente Cliente { get => cliente; set => cliente = value; }
         public EnumEstado Estado { get => estado; set => estado = value; }
-        public Cadete Cadete { get => cadete; set => cadete = value; }
-
+        public Cadete? Cadete { get => cadete; set => cadete = value; }
+        
+        // [JsonConstructor]
+        public Pedido() { }
         public Pedido(int nro, string obs, EnumEstado estado, string nombre, string direccion, ulong telefono, string datosReferenciaDireccion)
         {
-            this.nro = nro;
-            this.obs = obs;
-            this.cliente = new Cliente(nombre, direccion, telefono, datosReferenciaDireccion);
-            this.estado = estado;
-            this.Cadete = null;
+            Nro = nro;
+            Obs = obs;
+            Cliente = new Cliente(nombre, direccion, telefono, datosReferenciaDireccion);
+            Estado = estado;
+            Cadete = null;
         }
     }
 }
