@@ -135,19 +135,15 @@ namespace EspacioCadeteria
             }
         }
 
-        public bool ReasignarCadeteAPedido(int idPedido, int idCadete)
+        public void ReasignarCadeteAPedido(int idPedido, int idCadete)
         {
             if (ExistePedido(idPedido) && ExisteCadete(idCadete))
             {
                 Pedido pedido = listadoPedidos.First(p => p.Nro == idPedido);
                 Cadete cadete = listadoCadetes.First(c => c.Id == idCadete);
                 pedido.Cadete = cadete;
-                return true;
             }
-            else
-            {
-                return false;
-            }
+                
         }
 
         public void CambiarEstadoPedido(int idPedido, int estado)
