@@ -4,7 +4,7 @@ using EspacioCadeteria;
 
 namespace EspacioAccesoADatosCadeteria
 {
-    class AccesoADatosCadetes
+    class AccesoADatosCadeteria
     {
         public Cadeteria Obtener(string archivo)
         {
