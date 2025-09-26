@@ -1,4 +1,7 @@
 using System;
+using EspacioAccesoADatosCadeteria;
+using EspacioAccesoADatosCadetes;
+using EspacioAccesoADatosPedidos;
 using EspacioCadete;
 using EspacioCadeteria;
 using EspacioGestorArchivos;
@@ -14,14 +17,18 @@ namespace EspacioCadeteriaController
     [Route("api/cadeteria")]
     public class CadeteriaController : ControllerBase
     {
-        private static Cadeteria miCadeteria;
+        private Cadeteria miCadeteria;
+        private AccesoADatosCadeteria ADCadeteria;
+        private AccesoADatosCadetes ADCadetes;
+        private AccesoADatosPedidos ADPedidos;
 
-        static CadeteriaController()
+        public CadeteriaController()
         {
-            miCadeteria = GestorArchivos.TraerCadeteriaCSV("Archivos/Cadeteria.csv");
-            miCadeteria.CargarCadetesCSV("Archivos/Cadetes.csv");
-            Pedido pedido1 = new(3, "Traer vuelto de $10mil", EnumEstado.EnProceso, "Paula Navarro", "Bolivar 543", 38170000, "Departamento 8D");
-            miCadeteria.DarDeAltaPedido(pedido1);
+            ADCadeteria = new();
+            ADCadetes = new();
+            ADPedidos = new();
+
+            miCadeteria = ADCadeteria.Obtener("Archivos/Cadeteria.json");
         }
 
         [HttpGet("Pedidos")]
@@ -47,6 +54,7 @@ namespace EspacioCadeteriaController
         public IActionResult AgregarPedido([FromBody] Pedido pedido)
         {
             miCadeteria.DarDeAltaPedido(pedido);
+
             return Created($"api/cadeteria/AgregarPedido/{pedido.Nro}", pedido);
         }
 
