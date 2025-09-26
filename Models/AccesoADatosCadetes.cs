@@ -3,7 +3,7 @@ using System.Text.Json;
 using EspacioCadete;
 
 
-namespace EspacioDatosCadetes
+namespace EspacioAccesoADatosCadetes
 {
     class AccesoADatosCadetes
     {
