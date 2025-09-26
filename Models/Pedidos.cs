@@ -22,10 +22,15 @@ namespace EspacioPedido
         private Cadete? cadete;
 
 
+        [JsonPropertyName("Nro")]
         public int Nro { get => nro; set => nro = value; }
+        [JsonPropertyName("Obs")]
         public string Obs { get => obs; set => obs = value; }
+        [JsonPropertyName("Cliente")]
         public Cliente Cliente { get => cliente; set => cliente = value; }
+        [JsonPropertyName("Estado")]
         public EnumEstado Estado { get => estado; set => estado = value; }
+        [JsonPropertyName("Cadete")]
         public Cadete? Cadete { get => cadete; set => cadete = value; }
         
         // [JsonConstructor]
