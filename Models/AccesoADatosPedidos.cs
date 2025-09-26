@@ -8,7 +8,7 @@ namespace EspacioAccesoADatosPedidos
 {
     class AccesoADatosPedidos()
     {
-        public static List<Pedido> Obtener(string archivo)
+        public List<Pedido> Obtener(string archivo)
         {
             List<Pedido> listaPedidosJson = new();
             string textoJson = File.ReadAllText(archivo);
@@ -17,7 +17,7 @@ namespace EspacioAccesoADatosPedidos
             return listaPedidosJson;
         }
 
-        public static void Guardar(List<Pedido> pedidos)
+        public void Guardar(List<Pedido> pedidos)
         {
             string textoJson = JsonSerializer.Serialize(pedidos);
             string miArchivo = "Archivos/Pedidos.json";

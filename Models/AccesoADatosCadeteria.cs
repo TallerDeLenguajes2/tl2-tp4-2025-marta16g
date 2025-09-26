@@ -6,7 +6,7 @@ namespace EspacioAccesoADatosCadeteria
 {
     class AccesoADatosCadetes
     {
-        public static Cadeteria Obtener(string archivo)
+        public Cadeteria Obtener(string archivo)
         {
             Cadeteria cadeteria;
             string textoJson = File.ReadAllText(archivo);
