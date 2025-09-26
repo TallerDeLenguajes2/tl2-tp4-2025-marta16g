@@ -20,7 +20,7 @@ namespace EspacioCadeteriaController
         {
             miCadeteria = GestorArchivos.TraerCadeteriaCSV("Archivos/Cadeteria.csv");
             miCadeteria.CargarCadetesCSV("Archivos/Cadetes.csv");
-            Pedido pedido1 = new(1, "Traer vuelto de $10mil", EnumEstado.EnProceso, "Paula Navarro", "Bolivar 543", 38170000, "Departamento 8D");
+            Pedido pedido1 = new(3, "Traer vuelto de $10mil", EnumEstado.EnProceso, "Paula Navarro", "Bolivar 543", 38170000, "Departamento 8D");
             miCadeteria.DarDeAltaPedido(pedido1);
         }
 
@@ -51,18 +51,27 @@ namespace EspacioCadeteriaController
         }
 
         [HttpPut("AsignarPedido")]
-        public void AsignarPedido(int idPedido, int idCadete)
+        public IActionResult AsignarPedido(int idPedido, int idCadete)
         {
+            miCadeteria.AsignarCadeteAPedido(idPedido, idCadete);
+            return Ok($"Cadete {idCadete} asignado al pedido {idPedido} ");
         }
 
         [HttpPut("CambiarEstadoPedido")]
-        public void CambiarEstadoPedido(int idPedido, int NuevoEstado)
+        public IActionResult CambiarEstadoPedido(int idPedido, int nuevoEstado)
         {
+
+            miCadeteria.CambiarEstadoPedido(idPedido, nuevoEstado);
+
+            return Ok($"El pedido {idPedido} pasó a estado {(EnumEstado)nuevoEstado}");
+
         }
 
         [HttpPut("CambiarCadetePedido")]
-        public void CambiarCadetePedido(int idPedido, int idNuevoCadete)
+        public IActionResult CambiarCadetePedido(int idPedido, int idNuevoCadete)
         {
+            miCadeteria.ReasignarCadeteAPedido(idPedido, idNuevoCadete);
+            return Ok($"Pedido Número {idPedido} reasignado a cadete {idNuevoCadete}");
         }
     }
 

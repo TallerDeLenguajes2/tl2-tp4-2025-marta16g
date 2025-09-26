@@ -9,7 +9,7 @@ namespace EspacioGestorArchivos
 {
     public class GestorArchivos
     {
-        public Cadeteria TraerCadeteriaCSV(string archivo = "")
+        public static Cadeteria TraerCadeteriaCSV(string archivo = "")
         {
             Cadeteria cadeteria = new("Pepe's Cadetería", "Avenida Belgrano 3425", 4391541, "Alfredo Navarro");
             if (archivo.Length > 0)
@@ -30,7 +30,7 @@ namespace EspacioGestorArchivos
             return cadeteria;
         }
 
-        public List<Cadete> TraerCadetesCSV(string archivo, Cadeteria cadeteria)
+        public static List<Cadete> TraerCadetesCSV(string archivo, Cadeteria cadeteria)
         {
             List<Cadete> cadetes = new();
 
@@ -49,5 +49,6 @@ namespace EspacioGestorArchivos
 
             return cadetes;
         }
+
     }
 }
