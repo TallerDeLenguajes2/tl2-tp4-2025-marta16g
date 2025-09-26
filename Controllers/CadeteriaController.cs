@@ -29,6 +29,8 @@ namespace EspacioCadeteriaController
             ADPedidos = new();
 
             miCadeteria = ADCadeteria.Obtener("Archivos/Cadeteria.json");
+            miCadeteria.AgregarListaCadetes(ADCadetes.Obtener("Archivos/Cadetes.json"));
+            miCadeteria.AgregarListaPedidos(ADPedidos.Obtener("Archivos/Cadetes.json"));
         }
 
         [HttpGet("Pedidos")]
