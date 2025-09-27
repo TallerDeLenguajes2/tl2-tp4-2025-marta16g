@@ -1,0 +1,23 @@
+[
+    {
+        "Id": 51,
+        "Nombre": "Cristina Susana",
+        "Apellido": "Herrera",
+        "Direccion": "Barrio Kiko lote 5 casa 8",
+        "Telefono": 383890024
+    },
+    {
+        "Id": 52,
+        "Nombre": "Jesús Alberto",
+        "Apellido": "Gutierrez",
+        "Direccion": "Esquiú 175",
+        "Telefono": 3838100000
+    },
+    {
+        "Id": 53,
+        "Nombre": "Norma del Carmen",
+        "Apellido": "Villagra",
+        "Direccion": "Esquiú 175",
+        "Telefono": 3838100059
+    }
+]
