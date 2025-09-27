@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace EspacioCliente
 {
@@ -9,10 +10,13 @@ namespace EspacioCliente
         private ulong telefono;
         private string datosReferenciaDireccion;
 
-
+        [JsonPropertyName("Nombre")]
         public string Nombre { get => nombre; set => nombre = value; }
+        [JsonPropertyName("Direccion")]
         public string Direccion { get => direccion; set => direccion = value; }       
+        [JsonPropertyName("Telefono")]
         public ulong Telefono { get => telefono; set => telefono = value; }
+        [JsonPropertyName("DatosReferenciaDireccion")]
         public string DatosReferenciaDireccion { get => datosReferenciaDireccion; set => datosReferenciaDireccion = value; }
 
         
