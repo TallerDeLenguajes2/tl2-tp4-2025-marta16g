@@ -1,10 +1,10 @@
 using System;
+using System.Security.Authentication.ExtendedProtection;
 using EspacioAccesoADatosCadeteria;
 using EspacioAccesoADatosCadetes;
 using EspacioAccesoADatosPedidos;
 using EspacioCadete;
 using EspacioCadeteria;
-using EspacioGestorArchivos;
 using EspacioPedido;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +28,9 @@ namespace EspacioCadeteriaController
             ADCadetes = new();
             ADPedidos = new();
 
-            miCadeteria = ADCadeteria.Obtener("Archivos/Cadeteria.json");
-            miCadeteria.AgregarListaCadetes(ADCadetes.Obtener("Archivos/Cadetes.json"));
-            miCadeteria.AgregarListaPedidos(ADPedidos.Obtener("Archivos/Cadetes.json"));
+            miCadeteria = ADCadeteria.Obtener();
+            miCadeteria.AgregarListaCadetes(ADCadetes.Obtener());
+            miCadeteria.AgregarListaPedidos(ADPedidos.Obtener());
         }
 
         [HttpGet("Pedidos")]
@@ -65,18 +65,25 @@ namespace EspacioCadeteriaController
         [HttpPut("AsignarPedido")]
         public IActionResult AsignarPedido(int idPedido, int idCadete)
         {
-            miCadeteria.AsignarCadeteAPedido(idPedido, idCadete);
-            //Agregado del guardar en json
-            ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
+            bool exito = miCadeteria.AsignarCadeteAPedido(idPedido, idCadete);
+            if (exito)
+            {
+                //Agregado del guardar en json
+                ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
 
-            return Ok($"Cadete {idCadete} asignado al pedido {idPedido} ");
+                return Ok($"Cadete {idCadete} asignado al pedido {idPedido} ");
+            }
+            else
+            {
+                return BadRequest();  
+            }
         }
 
         [HttpPut("CambiarEstadoPedido")]
         public IActionResult CambiarEstadoPedido(int idPedido, int nuevoEstado)
         {
 
-            miCadeteria.CambiarEstadoPedido(idPedido, nuevoEstado);
+            bool exito = miCadeteria.CambiarEstadoPedido(idPedido, nuevoEstado);
             //Agregado del guardar en json
             ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
 
@@ -87,7 +94,7 @@ namespace EspacioCadeteriaController
         [HttpPut("CambiarCadetePedido")]
         public IActionResult CambiarCadetePedido(int idPedido, int idNuevoCadete)
         {
-            miCadeteria.ReasignarCadeteAPedido(idPedido, idNuevoCadete);
+            bool exito = miCadeteria.ReasignarCadeteAPedido(idPedido, idNuevoCadete);
             //Agregado del guardar en json
             ADPedidos.Guardar(miCadeteria.TraerListaPedidos());
             return Ok($"Pedido Número {idPedido} reasignado a cadete {idNuevoCadete}");
